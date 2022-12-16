@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PostsList from "./components/PostsList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
@@ -13,10 +13,12 @@ function App() {
   ]);
 
   const [title, setTitle] = useState("");
+  const bodyInputRef = useRef();
 
   const addNewPost = (e) => {
     e.preventDefault();
     console.log(title);
+    console.log(bodyInputRef.current.value);
   };
 
   return (
@@ -28,7 +30,7 @@ function App() {
           type="text"
           placeholder="Post name"
         />
-        <MyInput type="text" placeholder="Post content" />
+        <MyInput ref={bodyInputRef} type="text" placeholder="Post content" />
         <MyButton onClick={addNewPost}>Create Post</MyButton>
       </form>
       <PostsList posts={posts} title="JS Posts" />
