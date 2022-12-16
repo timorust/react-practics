@@ -23,6 +23,8 @@ function App() {
       body,
     };
     setPosts([...posts, newPost]);
+    setBody("");
+    setTitle("");
   };
 
   return (
