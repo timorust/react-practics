@@ -1,17 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
-import MyButton from "./components/UI/button/MyButton";
-import MyInput from "./components/UI/input/MyInput";
+import MySelect from "./components/UI/select/MySelect";
 import "./styles/App.css";
-// import ClassCounter from "./components/ClassCounter";
 
 function App() {
   const [posts, setPosts] = useState([
-    { id: 1, title: "JavaScrypt 1", body: "Description" },
-    { id: 2, title: "JavaScrypt 2", body: "Description" },
-    { id: 3, title: "JavaScrypt 3", body: "Description" },
+    { id: 1, title: "DD", body: "XX" },
+    { id: 2, title: "FF", body: "WW" },
+    { id: 3, title: "VV", body: "AA" },
   ]);
+
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const sortPost = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])));
+  };
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -24,7 +29,21 @@ function App() {
   return (
     <div className="App">
       <PostForm create={createPost} />
-      {posts.length !== 0 ? (
+      <hr style={{ margin: "15px 0" }} />
+
+      <div>
+        <MySelect
+          value={selectedSort}
+          onChange={sortPost}
+          defaultValue="Sort"
+          options={[
+            { value: "title", name: "Selection by name" },
+            { value: "body", name: "Selection by description" },
+          ]}
+        />
+      </div>
+
+      {posts.length ? (
         <PostsList remove={removePost} posts={posts} title="JS Posts" />
       ) : (
         <h1 style={{ textAlign: "center" }}>Post not founded!</h1>
