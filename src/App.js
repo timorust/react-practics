@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
@@ -12,39 +13,13 @@ function App() {
     { id: 3, title: "JavaScrypt 3", body: "Description" },
   ]);
 
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-
-  const addNewPost = (e) => {
-    e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      body,
-    };
+  const createPost = (newPost) => {
     setPosts([...posts, newPost]);
-    setBody("");
-    setTitle("");
   };
 
   return (
     <div className="App">
-      <form>
-        <MyInput
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          type="text"
-          placeholder="Post name"
-        />
-
-        <MyInput
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          type="text"
-          placeholder="Post content"
-        />
-        <MyButton onClick={addNewPost}>Create Post</MyButton>
-      </form>
+      <PostForm create={createPost} />
       <PostsList posts={posts} title="JS Posts" />
     </div>
   );
