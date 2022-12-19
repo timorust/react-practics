@@ -2,6 +2,9 @@ import React from "react";
 import PostItem from "./PostItem";
 
 const PostsList = ({ posts, title, remove }) => {
+  if (!posts.length) {
+    return <h1 style={{ textAlign: "center" }}>Post not founded!</h1>;
+  }
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>{title}</h1>
