@@ -65,7 +65,7 @@ function App() {
         />
       </div>
 
-      {posts.length ? (
+      {sortedAndSearchedPosts.length ? (
         <PostsList
           remove={removePost}
           posts={sortedAndSearchedPosts}
